@@ -46,12 +46,7 @@ export const zhSidebar = sidebar({
           collapsible: true,
           prefix: "netty/",
           children: ["Netty核心.md", "Netty高级.md"],
-        },
-        {
-          text: "Electron核心",
-          icon: "write",
-          link: "Electron核心.md",
-        },
+        }
       ],
     },
     {
