@@ -55,12 +55,9 @@ export const zhSidebar = sidebar({
       collapsible: true,
       prefix: "/codenotes/algdata/",
       children: [
-            "算法小抄核心套路.md",
             "算法小抄数学运算.md",
-            "算法小抄动态规划.md",
             "算法小抄数据结构.md",
-            "算法小抄算法思维.md",
-            "算法小抄高频面试.md",
+            "算法小抄高频面试.md"
           ],
     },
     {
