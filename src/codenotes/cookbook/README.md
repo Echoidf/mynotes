@@ -23,3 +23,10 @@ timeline: false
 ## 前端
 
 * [CSS在线技术文档](http://c.biancheng.net/css3/what-is-css.html)
+* [Vue3技术文档](https://vue3js.cn/)
+* [Vue365插件库](https://www.vue365.cn/)
+* [炫酷css组件库](https://navnav.co/)
+* [uniapp](https://uniapp.dcloud.net.cn/)
+* [animate|css效果](https://animate.style/)
+* [gsap](https://greensock.com/)
+

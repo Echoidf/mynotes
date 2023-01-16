@@ -14,12 +14,7 @@ export const zhSidebar = sidebar({
           icon: "write",
           link: "Java8新特性.md",
         },
-        {
-          text: "Java中的SPI机制",
-          icon: "write",
-          link: "Java中的SPI机制.md",
-        },
-      ],
+      ]
     },
     {
       text: "Java虚拟机",
