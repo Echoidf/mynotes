@@ -27,15 +27,23 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
 - 需要安装gcc编译器  yum install gcc
 - 安装目录默认在/usr/local/bin
   ![20230121105903](https://s2.loli.net/2023/01/21/lOwqJWADBI9Foa7.png)
-  >  redis-benchmark:性能测试工具
-  >  redis-check-aof：修复有问题的 AOF 文件
-  >  redis-check-dump：修复有问题的 dump.rdb 文件
-  >  redis-sentinel：Redis 集群使用
-  >  redis-server：Redis 服务器启动命令
-  >  redis-cli：客户端，操作入口
-  
+
+  > redis-benchmark:性能测试工具
+  >
+  > redis-check-aof:修复有问题的 AOF 文件
+  >
+  > redis-check-dump:修复有问题的 dump.rdb 文件
+  >
+  > redis-sentinel:Redis 集群使用
+  >
+  > redis-server:Redis 服务器启动命令
+  >
+  > redis-cli:客户端，操作入口
+  >
 - make安装
+
   > make && make install
+  >
 
 ## 2.Redis后台启动&使用
 
