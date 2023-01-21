@@ -18,7 +18,7 @@ article: true
 # 是否将该文章添加至时间线中
 timeline: true
 ---
-# 1.Redis安装下载
+## 1.Redis安装下载
 
 Redis下载地址：[Download | Redis](https://redis.io/download/)
 
@@ -38,7 +38,7 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
   > make && make install
   >
 
-# 2.Redis后台启动&使用
+## 2.Redis后台启动&使用
 
 拷贝redis目录下的redis.conf文件到/etc目录
 
@@ -59,7 +59,7 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
   > vim /etc/redis.conf   ##修改port即可
   >
 
-# 3.客户端访问
+## 3.客户端访问
 
 > /usr/local/bin/redis-cli -p 6379
 
@@ -69,11 +69,11 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
 
 进入redis后退出客户端（Redis服务没有结束）：quit/exit
 
-# 4.Redis指令
+## 4.Redis指令
 
 **指令文档**：[Redis命令中心（Redis commands）](http://redis.cn/commands.html)
 
-一些基本指令：
+**一些基本指令：**
 
 | 指令          | 功能                                      |
 | ------------- | ----------------------------------------- |
@@ -83,7 +83,7 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
 | quit/exit     | 退出客户端（Redis服务没有关闭）           |
 | help 命令名称 | 获取命令帮助文档                          |
 
-对key键操作：
+**对key键操作：**
 
 | 指令          | 功能                                                                                             |
 | ------------- | ------------------------------------------------------------------------------------------------ |
@@ -95,7 +95,7 @@ Redis下载地址：[Download | Redis](https://redis.io/download/)
 | expire key 10 | 10秒：为给定的key设置过期时间                                                                    |
 | ttl key       | 查看还有多少秒过期，-1表示永不过期，-2表示已过期（若set key时没有设置key过期时间默认为永不过期） |
 
-对DB操作：
+**对DB操作：**
 
 | 指令     | 功能                                                 |
 | -------- | ---------------------------------------------------- |
