@@ -60,7 +60,15 @@ export const zhSidebar = sidebar({
       icon: "mysql",
       collapsible: true,
       prefix: "/codenotes/database/",
-      children: [""],
+      children: [{
+        text: "Redis",
+        icon:"workingDirectory",
+        collapsible: true,
+        prefix: "Redis/",
+        children: [
+          "Redis学习day1.md"
+        ]
+      }],
     },
     {
       text: "云计算",
