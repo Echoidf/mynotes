@@ -66,7 +66,8 @@ export const zhSidebar = sidebar({
         collapsible: true,
         prefix: "Redis/",
         children: [
-          "Redis学习day1.md"
+          "安装及基本指令.md",
+          "五大数据类型及指令.md"
         ]
       }],
     },
