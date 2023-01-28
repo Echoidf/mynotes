@@ -18,11 +18,11 @@ article: true
 # 是否将该文章添加至时间线中
 timeline: true
 ---
-# 一、常规配置
+## 一、常规配置
 
-## 1.设置密码
+### 1.设置密码
 
-### a.永久设置--通过配置文件
+#### a.永久设置--通过配置文件
 
 ![20230128113221](https://s2.loli.net/2023/01/28/46wJHmdVPulz7EW.png)
 
@@ -30,7 +30,7 @@ requirepass配置可以让用户使用AUTH命令来认证密码，才能使用�
 
 使用requirepass的时候需要注意，因为redis太快了，每秒可以认证15w次密码，简单的密码很容易被攻破，所以最好使用一个更复杂的密码
 
-### b.命令行设置
+#### b.命令行设置
 
 ```shell
 127.0.0.1:6379> config set requirepass zql  #设置密码
@@ -53,11 +53,11 @@ OK
 127.0.0.1:6379>
 ```
 
-## 2.daemonize
+### 2.daemonize
 
 是否在后台执行，yes：后台运行；no：不是后台运行
 
-## 3.loglevel
+### 3.loglevel
 
 指定了服务端日志的级别。
 
@@ -68,51 +68,51 @@ OK
 - notice（适当的日志级别，适合生产环境）
 - warn（只有非常重要的信息）
 
-## 4.logfile
+### 4.logfile
 
 指定了记录日志的文件。空字符串的话，日志会打印到标准输出设备。后台运行的redis标准输出是/dev/null
 
-## 5.设定库的数量
+### 5.设定库的数量
 
 默认：`database 16`
 
 默认使用的数据库是0。可以通过”SELECT 【数据库序号】“命令选择一个数据库，序号从0开始
 
-# 二、Units单位
+## 二、Units单位
 
 配置文件中说明了基本的度量单位，只支持bytes，不支持bit【注意：1k=1000bytes】
 
 ![20230128111728](https://s2.loli.net/2023/01/28/EPnL4KCWzYMGF7x.png)
 
-# 三、#INCLUDES#
+## 三、#INCLUDES#
 
 多实例的情况下可以把公用的配置文件提取出来，然后include
 
 ![20230128112110](https://s2.loli.net/2023/01/28/lC6dnJ9AqsNPVri.png)
 
-# 四、#NETWORK#
+## 四、#NETWORK#
 
-## 1.bind
+### 1.bind
 
 - 默认情况bind=127.0.0.1只能接受本机的访问请求
 - 如果需要远程访问，需要注释掉该行
 
-## 2.protected-mode
+### 2.protected-mode
 
 - 默认是保护模式 `protected-mode yes`
 - 如果需要远程访问，需要改为no
 
-## 3.port
+### 3.port
 
 默认端口 `port 6379`
 
-## 4.timeout
+### 4.timeout
 
 默认 `timeout 0`
 
 一个空闲的客户端维持多少秒会关闭，0 表示关闭该功能, 即永不超时
 
-## 5.tcp-keepalive
+### 5.tcp-keepalive
 
 默认 `tcp-keepalive 300`
 
@@ -120,7 +120,7 @@ tcp-keepalive 是对访问客户端的一种心跳检测，每隔 n 秒检测一
 
 如果设置为 0，则不会进行 Keepalive 检测，建议设置成 60
 
-## 思考
+### 思考
 
 **为什么需要心跳检测机制？**
 
@@ -128,15 +128,15 @@ tcp-keepalive 是对访问客户端的一种心跳检测，每隔 n 秒检测一
 2. 长连接的环境下，进行一次数据交互后，很长一段时间内无数据交互时，客户端可能意外断开，这些 TCP 连接并未来得及正常释放，那么，连接的另一方并不知道对端的情况，它会一直维护这个连接，长时间的积累会导致非常多的半打开连接，造成端系统资源的消耗和浪费，且有可能导致在一个无效的数据链路层面发送业务数据，结果就是发送失败。所以服务器端要做到快速感知失败，减少无效链接操作，这就有了 TCP 的 Keepalive(保活探测)机制。
 
 
-# 五、#LIMITS限制#
+## 五、#LIMITS限制#
 
-## 1.maxclients
+### 1.maxclients
 
 设置 redis 同时可以与多少个客户端进行连接
 
 默认：`maxclients 10000`
 
-## 2.maxmemory
+### 2.maxmemory
 
 默认：`# maxmemory <bytes>`，在默认情况下, 对于 64 位实例没有限制，对 32 位 实例会限制在 3 GB, 因为 32 位的机器最大只支持 4GB 的内存，可以避免因为内存不足而导致 Redis 实例崩溃
 
@@ -149,7 +149,7 @@ tcp-keepalive 是对访问客户端的一种心跳检测，每隔 n 秒检测一
 - 如果使用 Redis 做数据库的话，设置到物理内存的 1/2 到 3/4 左右都可以
 - 如果使用了快照功能的话，最好用到 50%以下，因为快照复制更新需要双倍内存空间，如果没有使用快照而设置 redis 缓存数据库，可以用到内存的 80%左右，只要能保证 Java、NGINX 等其它程序可以正常运行就行了
 
-## 3.maxmemory-policy
+### 3.maxmemory-policy
 
 默认：`# maxmemory-policy noeviction`
 
@@ -162,7 +162,7 @@ tcp-keepalive 是对访问客户端的一种心跳检测，每隔 n 秒检测一
 5) volatile-ttl：移除那些 TTL 值最小的 key，即那些最近要过期的 key
 6) noeviction：不进行移除。针对写操作，只是返回错误信息
 
-## 4.maxmemory-samples
+### 4.maxmemory-samples
 
 默认：`# maxmemory-samples 5`
 
