@@ -33,6 +33,7 @@ timeline: false
 ## 后端
 
 - [Java Guide](https://javaguide.cn/)
+- [Java工程师成神之路](https://hollischuang.gitee.io/tobetopjavaer/#/)
 - [Road To Coding](https://r2coding.com/#/)
 - [Java全栈知识体系](https://pdai.tech/)
 - [RuoYi](http://doc.ruoyi.vip/)⭐⭐⭐
