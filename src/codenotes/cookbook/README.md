@@ -35,32 +35,33 @@ timeline: false
 - [Java Guide](https://javaguide.cn/)
 - [Road To Coding](https://r2coding.com/#/)
 - [Java全栈知识体系](https://pdai.tech/)
-- [RuoYi](http://doc.ruoyi.vip/)
+- [RuoYi](http://doc.ruoyi.vip/)⭐⭐⭐
 - [Knife4j](https://doc.xiaominfo.com/)
 - [小林coding](https://xiaolincoding.com/)
 - [未读代码](https://www.wdbyte.com/)
 - [Java设计模式](https://www.yiibai.com/design_pattern)
 - [后端HTTP框架Forest](https://forest.dtflyx.com/)
 - [Mybatis中文网](https://mybatis.net.cn/)
-- [凤凰架构](https://icyfenix.cn/)
+- [凤凰架构](https://icyfenix.cn/)⭐⭐
 
 ## 优质博客站点
 - [墨水记忆](https://tothefor.com/categories/)
 - [简言之](https://jwt1399.top/)
 - [linux98.com](https://www.linux98.com/)
-- [李恩泽教程](https://lienze.tech/)
+- [李恩泽教程](https://lienze.tech/)⭐⭐⭐
 - [阿斌Java之路](https://www.yuque.com/yuqueyonghudosgra/plqzv9)
 - [RedisTemplate操作Redis](https://blog.csdn.net/lydms/article/details/105224210)
 
 ## 算法与数据结构
-- [labuladong算法小抄](https://labuladong.github.io/algo/)
+- [labuladong算法小抄](https://labuladong.github.io/algo/)⭐⭐⭐
 - [代码随想录](https://programmercarl.com/)
-- [CodeTop](https://codetop.cc/home)
+- [CodeTop](https://codetop.cc/home)⭐⭐
 
 ## 其他|工具
-- [导航网站](https://nav.cnxiaobai.com/)
+- [导航网站](https://nav.cnxiaobai.com/)⭐⭐⭐
 - [Hutool Java工具类库](https://www.hutool.cn/docs/#/)
 - [程序员工具箱](http://tool.pfan.cn/daohang)
+- [程序员盒子](https://www.coderutil.com/)⭐⭐⭐
 - [JSON生成Java实体类](https://www.bejson.com/json2javapojo/new/)
-- [Quick Reference备忘清单](https://quickref.cn/)
+- [Quick Reference备忘清单](https://quickref.cn/)⭐⭐
 
