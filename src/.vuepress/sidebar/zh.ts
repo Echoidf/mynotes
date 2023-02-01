@@ -68,7 +68,9 @@ export const zhSidebar = sidebar({
         children: [
           "安装及基本指令.md",
           "五大数据类型及指令.md",
-          "Redis配置.md"
+          "Redis配置.md",
+          "发布订阅.md",
+          "Redis持久化.md"
         ]
       }],
     },
