@@ -70,7 +70,8 @@ export const zhSidebar = sidebar({
           "五大数据类型及指令.md",
           "Redis配置.md",
           "发布订阅.md",
-          "Redis持久化.md"
+          "Redis持久化.md",
+          "Redis事务.md"
         ]
       }],
     },
@@ -91,8 +92,7 @@ export const zhSidebar = sidebar({
       prefix: "/codenotes/web/",
       children: [
           "vue钩子函数.md",
-          "分页操作详解.md",
-          "异步函数.md"
+          "分页操作详解.md"
       ]
     },
     {

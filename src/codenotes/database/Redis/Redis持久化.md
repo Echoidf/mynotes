@@ -39,7 +39,7 @@ timeline: true
 
 > 以日志的形式来记录每个写操作(增量保存)，将 Redis 执行过的所有写指令记录下来(比如 set/del 操作会记录, 读操作 get 不记录)
 >
-> 只许许追加文件但不可以改写文件
+> 只许追加文件但不可以改写文件
 >
 > redis 启动之初会读取该文件重新构建数据
 >
@@ -109,3 +109,86 @@ rdb文件存储位置：默认为 Redis 启动时命令行所在的目录下
 a. config get dir 查询 rdb 文件的目录
 
 b. 将 dump.rdb 进行备份, 如果有必要可以写 shell 脚本来定时备份
+
+### 6.小结
+
+a. 优势
+
+1、适合大规模的数据恢复
+2、对数据完整性和一致性要求不高更适合使用
+3、节省磁盘空间
+4、恢复速度快
+
+b. 劣势
+
+1、虽然 Redis 在 fork 时使用了写时拷贝技术(Copy-On-Write),但是如果数据庞大时还是比较消耗性能。
+
+2、在备份周期在一定间隔时间做一次备份，所以如果 Redis 意外 down 掉的话(如果正常关闭 Redis, 仍然会进行 RDB 备份, 不会丢失数据), 就会丢失最后一次快照后的所有修改
+
+## 三、AOF
+
+### 1.持久化流程
+
+1) 客户端的请求写命令会被 `append` 追加到 `AOF 缓冲区` 内
+2) AOF 缓冲区根据 `AOF 持久化策略` [always,everysec,no]将操作 sync 同步到磁盘的 `AOF 文件` 中
+
+   > AOF频率设置
+   >
+
+   ```shell
+   appendfsync everysec # 每秒进行一次同步，显示的将多个写命令同步到硬盘
+   appendfsync always # 每个redis写命令都同步的写入磁盘，这样做会严重降低redis的速度
+   appendfsync no # 由操作系统决定应该何时进行同步
+   ```
+3) AOF 文件大小超过重写策略或手动重写时，会对 AOF 文件 `rewrite` 重写，压缩 AOF 文件容量
+
+   > AOF文件手动重写
+   >
+
+   可以向redis发送 `bgrewriteaof`，这个命令会移除在文件中的冗余命令来重写rewriteAOF文件，使AOF文件的体积变得尽可能的小
+
+   还需要注意的是，当AOF文件过大，在重写过程以及重写完成之后删除旧有AOF文件，删除一个较大的AOF文件还可能会导致操作系统挂起数秒
+
+   > AOF文件自动重写策略
+   >
+
+   ```shell
+   auto-aof-rewrite-percentage 100
+   auto-aof-rewrite-min-size 64mb
+   ```
+
+   上述选项的含义：当AOF文件此时大于64M，并且AOF文件的体积比上一次重写之后的体积大于了至少一倍100%，那么redis就会执行 `BGREWRITEAOF`命令
+4) Redis 服务重启时，会重新 `load` 加载 AOF 文件中的写操作达到数据恢复目的
+
+### 2.开启AOF
+
+- 在 redis.conf 中配置文件名称，默认为 appendonly.aof,需要开启appendonly选项，默认为no
+- AOF 文件的保存路径，同 RDB 的路径一致
+- AOF 和 RDB 同时开启，系统默认读取 AOF 的数据
+
+```shell
+1253 appendonly yes
+1254
+1255 # The name of the append only file (default: "appendonly.aof")
+1256
+1257 appendfilename "appendonly.aof"
+```
+
+### 3.AOF异常恢复
+
+- 如遇到 AOF 文件损坏，通过/usr/local/bin/redis-check-aof --fix appendonly.aof 进行恢复
+- 建议先: 备份被写坏的 AOF 文件
+- 恢复：重启 redis，然后重新加载
+
+### 4.小结
+
+a. 优势
+
+1、备份机制更稳健，丢失数据概率更低。
+2、可读的日志文本，通过操作 AOF 稳健，可以处理误操作
+
+b. 劣势
+
+1、比起 RDB 占用更多的磁盘空间
+2、恢复备份速度要慢
+3、每次读写都同步的话，有一定的性能压力
