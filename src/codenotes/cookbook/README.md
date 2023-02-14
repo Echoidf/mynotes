@@ -36,6 +36,8 @@ timeline: false
 - [Java工程师成神之路](https://hollischuang.gitee.io/tobetopjavaer/#/)
 - [Road To Coding](https://r2coding.com/#/)
 - [Java全栈知识体系](https://pdai.tech/)
+- [CS-Notes ⭐⭐⭐](https://www.cyc2018.xyz/)
+- [Java 工程师进阶知识完全扫盲 - Doocs 技术社区 ⭐⭐](https://doocs.gitee.io/advanced-java/#/)
 - [RuoYi](http://doc.ruoyi.vip/)⭐⭐⭐
 - [Knife4j](https://doc.xiaominfo.com/)
 - [小林coding](https://xiaolincoding.com/)
@@ -46,23 +48,33 @@ timeline: false
 - [凤凰架构](https://icyfenix.cn/)⭐⭐
 
 ## 优质博客站点
+
 - [墨水记忆](https://tothefor.com/categories/)
 - [简言之](https://jwt1399.top/)
 - [linux98.com](https://www.linux98.com/)
 - [李恩泽教程](https://lienze.tech/)⭐⭐⭐
 - [阿斌Java之路](https://www.yuque.com/yuqueyonghudosgra/plqzv9)
 - [RedisTemplate操作Redis](https://blog.csdn.net/lydms/article/details/105224210)
+- [字节三面：如何设计一个高并发系统 - 掘金 (juejin.cn)⭐⭐⭐](https://juejin.cn/post/7185736156573597756)
 
 ## 算法与数据结构
+
 - [labuladong算法小抄](https://labuladong.github.io/algo/)⭐⭐⭐
 - [代码随想录](https://programmercarl.com/)
+- [小浩算法 ⭐⭐⭐](https://www.geekxh.com/0.0.%E5%AD%A6%E4%B9%A0%E9%A1%BB%E7%9F%A5/01.html)
 - [CodeTop](https://codetop.cc/home)⭐⭐
 
+## AI网站
+
+- [Chatsonic | Writesonic](https://app.writesonic.com/template/28147f94-47c1-4b60-85a6-2eea4ff89370/chatsonic/61a052b6-7350-4fe6-baa1-3cabe42120e8)
+- [ChatGPT](https://chat.openai.com/chat)
+
 ## 其他|工具
+
 - [导航网站](https://nav.cnxiaobai.com/)⭐⭐⭐
+- [GitHub-Chinese-Top-Charts: GitHub中文排行榜⭐⭐⭐](https://github.com/GrowingGit/GitHub-Chinese-Top-Charts?utm_source=gold_browser_extension)
 - [Hutool Java工具类库](https://www.hutool.cn/docs/#/)
 - [程序员工具箱](http://tool.pfan.cn/daohang)
 - [程序员盒子](https://www.coderutil.com/)⭐⭐⭐
 - [JSON生成Java实体类](https://www.bejson.com/json2javapojo/new/)
 - [Quick Reference备忘清单](https://quickref.cn/)⭐⭐
-

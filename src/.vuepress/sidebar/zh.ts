@@ -71,7 +71,8 @@ export const zhSidebar = sidebar({
           "Redis配置.md",
           "发布订阅.md",
           "Redis持久化.md",
-          "Redis事务.md"
+          "Redis事务.md",
+          "火车抢票并发问题.md"
         ]
       }],
     },
