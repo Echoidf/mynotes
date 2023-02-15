@@ -5,12 +5,6 @@ import { getDirname, path } from "@vuepress/utils";
 import {viteBundler} from "@vuepress/bundler-vite";
 import theme from "./theme.js";
 
-module.exports = {
-  enhanceAppFiles: [
-    'path/to/enhanceApp.ts'
-  ]
-}
-
 // @ts-ignore
 const __dirname = getDirname(import.meta.url);
 
