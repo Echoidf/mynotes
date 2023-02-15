@@ -20,7 +20,7 @@ timeline: true
 
 ## 一、简介
 
-![image-20230215134734898](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230215134734898.png)
+![20230214192640.png](https://s2.loli.net/2023/02/14/iB2rlPg7XjmNIC3.png)
 
 Master【主】：以写为主
 
@@ -62,7 +62,7 @@ dbfilename dump6379.rdb
 
 ### 2、启动三个Redis服务
 
-![image-20230214200504524](https://article.biliimg.com/bfs/article/b4eb66df74afee4e98bf7e58166443b4a722d97c.png?referrerPolicy=no-referrer)
+![image.png](https://s2.loli.net/2023/02/15/VWaExKfdn9Q26Aw.png)
 
 ### 3、配置主从
 
@@ -74,7 +74,7 @@ dbfilename dump6379.rdb
 slaveof 127.0.0.1 6379
 ```
 
-![image-20230214224003864](https://article.biliimg.com/bfs/article/5ee02ee3afe7ab10e7e91d6dc210b9d8106ad80a.png)
+![image.png](https://s2.loli.net/2023/02/15/hEpgGwWRzoDCYQI.png)
 
 现在6380，6381端口的角色已经变成了slave，master_port为6379
 
@@ -123,7 +123,7 @@ sentinel monitor redis_master 127.0.0.1 6379 1
 
 启动哨兵：`redis-sentinel sentinel.conf`
 
-![image-20230214231600672](https://article.biliimg.com/bfs/article/bdfdc46433bf9c624dba3e3bb0e2ab0facf828bc.png)
+![image.png](https://s2.loli.net/2023/02/15/ckTtOPS3NzqaCxX.png)
 
 哨兵如何在从机中, 推选新的 Master 主机, 选择的条件依次为：
 
@@ -137,7 +137,7 @@ sentinel monitor redis_master 127.0.0.1 6379 1
 
 **redis3.0 提供解决方案-无中心化集群配置**
 
-![image-20230214232518616](https://article.biliimg.com/bfs/article/3f12c0775227da367eebfad940639805ed3b14fc.png)
+![image.png](https://s2.loli.net/2023/02/15/i6TGjRhCtO3DU5r.png)
 
 1. 各个 Redis 服务仍然采用主从结构 
 
