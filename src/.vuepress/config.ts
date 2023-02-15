@@ -16,7 +16,9 @@ export default defineUserConfig({
     }
   }),
   base: "/mynotes/",
-
+  head: [
+    ['meta', { name: 'referrer', content: 'no-referrer' }]
+  ],
   // 多语言设置
   locales: {
     "/": {
@@ -25,7 +27,7 @@ export default defineUserConfig({
       description: "Zuooの学习笔记",
       // 设置favicon
       head: [["link", { rel: "icon", href: "/favicon.svg" }]],
-    },
+    }
   },
   // 主题设置
   theme,
@@ -51,5 +53,5 @@ export default defineUserConfig({
     }),
   ],
 
-  shouldPrefetch: false,
+  shouldPrefetch: false
 });
