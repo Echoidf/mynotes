@@ -20,7 +20,7 @@ timeline: true
 
 ## 一、简介
 
-![image-20230214211606941](https://article.biliimg.com/bfs/article/a96eda9d3c42f4aad4b8c5824ffd635771e6b210.png)
+![image-20230214211606941](https://article.biliimg.com/bfs/article/a96eda9d3c42f4aad4b8c5824ffd635771e6b210.png?referrerPolicy=no-referrer)
 
 Master【主】：以写为主
 
@@ -62,7 +62,7 @@ dbfilename dump6379.rdb
 
 ### 2、启动三个Redis服务
 
-![image-20230214200504524](https://article.biliimg.com/bfs/article/b4eb66df74afee4e98bf7e58166443b4a722d97c.png)
+![image-20230214200504524](https://article.biliimg.com/bfs/article/b4eb66df74afee4e98bf7e58166443b4a722d97c.png?referrerPolicy=no-referrer)
 
 ### 3、配置主从
 
