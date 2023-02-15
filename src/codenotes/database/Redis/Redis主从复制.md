@@ -242,9 +242,9 @@ redis-cli -c -p 6379
 
 **查询集群中的值**
 
-- 指令: CLUSTER KEYSLOT <key> 					返回 key 对应的 slot 值 
-- 指令: CLUSTER COUNTKEYSINSLOT <slot> 返回 slot 有多少个 key 
-- 指令: CLUSTER GETKEYSINSLOT <slot> <count> 返回 count 个 slot 槽中的键
+- 指令: CLUSTER KEYSLOT [key] 					返回 key 对应的 slot 值 
+- 指令: CLUSTER COUNTKEYSINSLOT [slot] 返回 slot 有多少个 key 
+- 指令: CLUSTER GETKEYSINSLOT [slot] [count] 返回 count 个 slot 槽中的键
 
 ### 4、集群故障恢复
 
