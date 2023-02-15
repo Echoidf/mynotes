@@ -20,7 +20,7 @@ timeline: true
 
 ## 一、简介
 
-![image-20230214211606941](https://article.biliimg.com/bfs/article/a96eda9d3c42f4aad4b8c5824ffd635771e6b210.png?referrerPolicy=no-referrer)
+![image-20230215134734898](../../../../../AppData/Roaming/Typora/typora-user-images/image-20230215134734898.png)
 
 Master【主】：以写为主
 
@@ -157,7 +157,7 @@ sentinel monitor redis_master 127.0.0.1 6379 1
 
 配置文件目录如下：
 
-![image-20230215084847542](https://article.biliimg.com/bfs/article/9f6fae772ecd32bd3589fb33e28c141a280adc6d.png)
+![image.png](https://s2.loli.net/2023/02/15/qL5K6rVNkcEiMOb.png)
 
 其中 `redis6379.conf `内容如下：
 
@@ -179,11 +179,11 @@ cluster-node-timeout 15000
 
 2. **启动6个Redis服务**
 
-![image-20230215085950746](https://article.biliimg.com/bfs/article/c6aa087d4dc25ab670c0189990a21166a47e051f.png)
+![image.png](https://s2.loli.net/2023/02/15/ZlcdMCgiPVDuB61.png)
 
 ​	发现结点配置文件也成功生成了：
 
-![image-20230215092542987](https://article.biliimg.com/bfs/article/545b7e7a236ac55904e671d71be23d271603d70c.png)
+![image.png](https://s2.loli.net/2023/02/15/odgTv4JiP7Emye2.png)
 
 3. **将6个结点合成一个集群**
 
@@ -199,7 +199,7 @@ redis-cli --cluster create --cluster-replicas 1 192.168.50.132:6379 192.168.50.1
 - replicas 1 采用最简单的方式配置集群，一台主机，一台从机，正好三组
 - 搭建集群如果没有成功, 把 sentinel 进程 kill 掉重新试一下
 
-![image-20230215093337989](https://article.biliimg.com/bfs/article/0ab5ebd2d8e0105dfc19be395d5f67be6fa20e10.png)
+![image.png](https://s2.loli.net/2023/02/15/LVgkrucY168IUEf.png)
 
 M代表主机，S代表从机，S后面的序列号可以判断出其从属关系：
 
@@ -220,7 +220,7 @@ redis-cli -c -p 6379
 127.0.0.1:6379> cluster nodes
 ```
 
-![image-20230215094351073](https://article.biliimg.com/bfs/article/4916c5017d5887d83d96fa18c2761b4162252609.png)
+![image.png](https://s2.loli.net/2023/02/15/v82kF1CPLRpOwiU.png)
 
 **哈希槽solts**
 
@@ -230,15 +230,15 @@ redis-cli -c -p 6379
 
 通过redis-cli -c -p 6379登录后，可以实现自动重定向
 
-![image-20230215095113507](https://article.biliimg.com/bfs/article/a125fc81a89efc97a6d483f334e07bed8fa1b85b.png)
+![image.png](https://s2.loli.net/2023/02/15/qV7sxKLkaQjRNBF.png)
 
 不在一个 slot 下的键值，是不能使用 mget，mset 等多键操作
 
-![image-20230215095300893](https://article.biliimg.com/bfs/article/3bb2309543233a931f2ac4ed7bebecf7f2fe0c5a.png)
+![image.png](https://s2.loli.net/2023/02/15/JFu2wtSfWi9pCLo.png)
 
 可以通过{}来定义组的概念，从而使 key 中{}内相同内容的键值对放到一个 slot
 
-![image-20230215095444036](https://article.biliimg.com/bfs/article/a53fdc86adead7b1841aceb6fa4e15d463926431.png)
+![image.png](https://s2.loli.net/2023/02/15/uOVvXhmfcjlP178.png)
 
 **查询集群中的值**
 
