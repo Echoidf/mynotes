@@ -37,6 +37,7 @@ timeline: false
 - [Road To Coding](https://r2coding.com/#/)
 - [Java全栈知识体系](https://pdai.tech/)
 - [CS-Notes ⭐⭐⭐](https://www.cyc2018.xyz/)
+- [SpringCloud教程](https://www.macrozheng.com/cloud/cloud_catalog.html)
 - [Java 工程师进阶知识完全扫盲 - Doocs 技术社区 ⭐⭐](https://doocs.gitee.io/advanced-java/#/)
 - [RuoYi](http://doc.ruoyi.vip/)⭐⭐⭐
 - [Knife4j](https://doc.xiaominfo.com/)
@@ -51,11 +52,14 @@ timeline: false
 
 - [墨水记忆](https://tothefor.com/categories/)
 - [简言之](https://jwt1399.top/)
+- [Mr.Hope⭐⭐⭐](https://mrhope.site/)
 - [linux98.com](https://www.linux98.com/)
 - [李恩泽教程](https://lienze.tech/)⭐⭐⭐
 - [阿斌Java之路](https://www.yuque.com/yuqueyonghudosgra/plqzv9)
+- [pymjl的博客⭐⭐](http://www.pymjl.com/#/README)
 - [RedisTemplate操作Redis](https://blog.csdn.net/lydms/article/details/105224210)
 - [字节三面：如何设计一个高并发系统 - 掘金 (juejin.cn)⭐⭐⭐](https://juejin.cn/post/7185736156573597756)
+- [ITPUB技术论坛_专业的IT技术社区](http://www.itpub.net/)⭐⭐
 
 ## 算法与数据结构
 

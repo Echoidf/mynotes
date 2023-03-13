@@ -41,6 +41,13 @@ export const zhSidebar = sidebar({
           collapsible: true,
           prefix: "netty/",
           children: ["Netty核心.md", "Netty高级.md"],
+        },
+        {
+          text: "ElasticSearch",
+          icon: "network",
+          collapsible: true,
+          prefix: "ES/",
+          children: ["ES基础.md", "DSL搜索.md"],
         }
       ],
     },
@@ -73,7 +80,8 @@ export const zhSidebar = sidebar({
           "Redis持久化.md",
           "Redis事务.md",
           "火车抢票并发问题.md",
-          "Redis主从复制.md"
+          "Redis主从复制.md",
+          "Redis缓存应用问题.md"
         ]
       }],
     },
@@ -96,6 +104,18 @@ export const zhSidebar = sidebar({
           "vue钩子函数.md",
           "分页操作详解.md"
       ]
+    },
+    {
+      text: "面试&难点",
+      icon: "read",
+      collapsible: true,
+      prefix: "/codenotes/work/",
+      children: [
+        "面试.md",
+        "分布式ID.md",
+        "分布式事务.md",
+        "MySQL自增ID跳跃问题.md"
+      ],
     },
     {
       text: "在线技术文档",
