@@ -14,10 +14,8 @@ sticky: false
 star: false
 # 是否将该文章添加至文章列表中
 article: true
-# 是否将该文章添加至时间线中
 timeline: true
 ---
-
 ## 一、核心概念
 
 - ES->数据库
@@ -28,9 +26,8 @@ timeline: true
 ### 集群相关
 
 - 分片(sard)：把索引库拆分为多份，分别放在不同的节点上，比如有3个节点，3个节点的所有数据内容加在一起是一个完整的索引库。分别保存到三个节点上，目的为了水平扩展，提高吞吐量。
-
 - 备份(replica):每个shard的备份。
-  
+
   **简称**
   shard = primary shard(主分片)
   replica = replica shard(备份节点)
@@ -58,10 +55,10 @@ ES_JAVA_HOME=C:\Users\86188\Documents\java-study\software\elasticsearch-7.4.2\jd
 ES_HOME=C:\Users\86188\Documents\java-study\software\elasticsearch-7.4.2
 ```
 
-7.x版本点击`bin/elasticsearch.bat`启动程序
+7.x版本点击 `bin/elasticsearch.bat`启动程序
 
-> 如果出现启动错误，显示`Unrecognized VM option 'UseConcMarkSweepGC`，将config/jvm.options文件中GC configruation下面三行注释掉
-> 
+> 如果出现启动错误，显示 `Unrecognized VM option 'UseConcMarkSweepGC`，将config/jvm.options文件中GC configruation下面三行注释掉
+>
 > ```shell
 > ##GC configuration
 > #-XX:+UseConcMarkSweepGC
@@ -76,24 +73,17 @@ ES_HOME=C:\Users\86188\Documents\java-study\software\elasticsearch-7.4.2
 ### 1、主要数据类型
 
 - text,keyword,string
-
 - long,integer,short,byte
-
 - double,float
-
 - boolean
-
 - date
-
 - object
-
 - 数组不能混，类型一致
 
 注意：
 
 - text：文字类需要被分词被倒排索引的内容，比如商品名称，商品详情，商品介绍，使用text。
-
-- keyword：**<mark>不会被分词，不会被倒排索引，直接匹配搜索</mark>**，比如订单状态，用户qq,微信号，手机号等，这些精确匹配，无需分词。
+- keyword：**`<mark>`不会被分词，不会被倒排索引，直接匹配搜索`</mark>`**，比如订单状态，用户qq,微信号，手机号等，这些精确匹配，无需分词。
 
 ### 2、索引
 
@@ -220,10 +210,9 @@ GET /{index_name}/_doc/{id}?_source=id,name
 GET /{index_name}/_doc/_search?_source=id,name
 ```
 
-<mark>文档乐观锁控制 </mark>`if_seq_no` 和 `if_primary_term`
+`<mark>`文档乐观锁控制 `</mark>if_seq_no` 和 `if_primary_term`
 
 - _seq_no：文档版本号，作用同_version
-
 - primary term：文档所在位置
 
 ## 四、分词器
@@ -231,13 +220,9 @@ GET /{index_name}/_doc/_search?_source=id,name
 ES内置分词器：
 
 - standard ：默认分词，单词会被拆分，大小写会转换小写。
-
 - simple：按照非字母分词。大写会转为小写。
-
 - whitespace :按照空格分词。忽略大小写。
-
 - stop: 去除无意义单词。比如the/a/an/is...
-
 - keyword：不做分词。把整个文本作为一个单独的关键词
 
 ```sql
@@ -256,12 +241,11 @@ IK中文分词器
 analyzer可设置为：
 
 - ik_max_word：最细粒度划分
-
 - ik_smart：会做最粗粒度的拆分
 
 ## 五、自定义中文词库
 
-修改 `plugins/ik/config` 下的<mark>IKAnalyzer.cfg.xml</mark>文件，进行配置
+修改 `plugins/ik/config` 下的`<mark>`IKAnalyzer.cfg.xml`</mark>`文件，进行配置
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>

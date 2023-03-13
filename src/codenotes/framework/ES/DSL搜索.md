@@ -14,10 +14,8 @@ sticky: false
 star: false
 # 是否将该文章添加至文章列表中
 article: true
-# 是否将该文章添加至时间线中
 timeline: true
 ---
-
 ## 一、QueryString
 
 请求参数的查询（QueryString）
@@ -27,7 +25,7 @@ GET     /shop/_doc/_search?q=desc:慕课网
 GET     /shop/_doc/_search?q=nickname:慕&q=age:25
 ```
 
-这种方式被称之为<mark>QuerySting</mark>查询方式，参数都是放在url中作为请求参数的
+这种方式被称之为`<mark>`QuerySting`</mark>`查询方式，参数都是放在url中作为请求参数的
 
 ## 二、DSL基本语法
 

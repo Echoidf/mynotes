@@ -113,7 +113,6 @@ export const zhSidebar = sidebar({
       children: [
         "面试.md",
         "分布式ID.md",
-        "分布式事务.md",
         "MySQL自增ID跳跃问题.md"
       ],
     },
