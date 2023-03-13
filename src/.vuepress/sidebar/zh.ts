@@ -57,33 +57,45 @@ export const zhSidebar = sidebar({
       collapsible: true,
       prefix: "/codenotes/algdata/",
       children: [
-            "算法小抄数学运算.md",
-            "算法小抄数据结构.md",
-            "算法小抄高频面试.md"
-          ],
+        "算法小抄数学运算.md",
+        "算法小抄数据结构.md",
+        "算法小抄高频面试.md"
+      ],
     },
     {
       text: "数据库",
       icon: "mysql",
       collapsible: true,
       prefix: "/codenotes/database/",
-      children: [{
-        text: "Redis",
-        icon:"workingDirectory",
-        collapsible: true,
-        prefix: "Redis/",
-        children: [
-          "安装及基本指令.md",
-          "五大数据类型及指令.md",
-          "Redis配置.md",
-          "发布订阅.md",
-          "Redis持久化.md",
-          "Redis事务.md",
-          "火车抢票并发问题.md",
-          "Redis主从复制.md",
-          "Redis缓存应用问题.md"
-        ]
-      }],
+      children: [
+        {
+          text: "MySQL",
+          icon: "workingDirectory",
+          collapsible: true,
+          prefix: "MySQL/",
+          children: [
+            "Ubuntu安装Mysql.md",
+            "MySQL自增ID跳跃问题.md"
+          ]
+        },
+        {
+          text: "Redis",
+          icon: "workingDirectory",
+          collapsible: true,
+          prefix: "Redis/",
+          children: [
+            "安装及基本指令.md",
+            "五大数据类型及指令.md",
+            "Redis配置.md",
+            "发布订阅.md",
+            "Redis持久化.md",
+            "Redis事务.md",
+            "火车抢票并发问题.md",
+            "Redis主从复制.md",
+            "Redis缓存应用问题.md"
+          ]
+        }
+      ],
     },
     {
       text: "云计算",
@@ -101,8 +113,8 @@ export const zhSidebar = sidebar({
       collapsible: true,
       prefix: "/codenotes/web/",
       children: [
-          "vue钩子函数.md",
-          "分页操作详解.md"
+        "vue钩子函数.md",
+        "分页操作详解.md"
       ]
     },
     {
@@ -112,8 +124,7 @@ export const zhSidebar = sidebar({
       prefix: "/codenotes/work/",
       children: [
         "面试.md",
-        "分布式ID.md",
-        "MySQL自增ID跳跃问题.md"
+        "分布式ID.md"
       ],
     },
     {
