@@ -7,7 +7,7 @@ import { zhSidebar } from "./sidebar/index.js";
 // 主题设置
 export default hopeTheme({
   // 当前网站部署到的域名
-  hostname: "https://gitee.com/oucystong",
+  hostname: "http://www.codepit.tech/mynotes/",
 
   // 文章显示的默认作者
   author: {
@@ -19,13 +19,13 @@ export default hopeTheme({
   iconAssets: "iconfont",
 
   // 网站图标
-  logo: "/site_logo.png",
+  logo: "https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/avatar.jpeg",
 
   // 导航栏上的个人仓库地址
-  repo: "https://zqlyuchu.gitee.io/mynotes/",
+  repo: "https://github.com/Echoidf/mynotes.git",
 
   // 自定义仓库链接文字-默认从repo中自动推断为"GitHub" / "GitLab" / "Gitee" / "Bitbucket" 其中之一，或是 "Source"。
-  repoLabel: "Gitee",
+  repoLabel: "GitHub",
 
   // 是否在导航栏内显示仓库链接-默认为true
   repoDisplay: true,

@@ -75,7 +75,8 @@ export const zhSidebar = sidebar({
           prefix: "MySQL/",
           children: [
             "Ubuntu安装Mysql.md",
-            "MySQL自增ID跳跃问题.md"
+            "MySQL自增ID跳跃问题.md",
+            "MySQL面试总结.md"
           ]
         },
         {

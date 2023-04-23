@@ -2,7 +2,7 @@
 home: true
 icon: home
 title: 个人主页
-heroImage: /head_logo.png
+heroImage: https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/avatar.jpeg
 heroText: Zuooの学习笔记
 tagline: ✨旭暗华光如火，惊鸿掠过，不见星河月波✨
 actions:
@@ -27,4 +27,3 @@ features:
     details: Zuooの力扣
     link: https://leetcode.cn/
 ---
-
