@@ -55,13 +55,13 @@ MySQL索引使用的是B+树结构，是一种磁盘友好的数据结构。它�
 ## 2、事务
 **事务的四个特性：ACID**<br />原子性、隔离性、一致性、持久性<br />事务保证了一系列的操作要么全部成功要么全部失败，一旦事务提交，则其所做的修改会永久保存到数据库。
 
-**事务隔离级别**<br />MySQL默认隔离级别是可重复读，可以避免脏读和不可重复读，可能会幻读<br />脏读和不可重复读的区别就是后者读到的是**已提交**的数据<br />幻读就是一个事务读取了某些记录，另一个事务又进行了**插入或者删除**操作，这种事务是没办法用行级锁来解决的<br />有四种隔离级别：读未提交、读已提交、可重复读、串行化<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681692046796-8fd1ee52-a64d-4ade-82a2-9d05aaca97ae.png#averageHue=%23bbcce3&clientId=u1f4e3c3e-94be-4&from=paste&id=u0b1a6481&name=image.png&originHeight=243&originWidth=896&originalType=url&ratio=1.100000023841858&rotation=0&showTitle=false&size=26044&status=done&style=none&taskId=ub1ad722f-7c99-4ba7-a819-f14de465b98&title=)
+**事务隔离级别**<br />MySQL默认隔离级别是可重复读，可以避免脏读和不可重复读，可能会幻读<br />脏读和不可重复读的区别就是后者读到的是**已提交**的数据<br />幻读就是一个事务读取了某些记录，另一个事务又进行了**插入或者删除**操作，这种事务是没办法用行级锁来解决的<br />有四种隔离级别：读未提交、读已提交、可重复读、串行化<br />![image.png](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214646.png)
 
 **关于记录锁/间隙锁**<br />在可重复读的隔离级别下，对一行数据进行查询或者更新都会加记录锁** record lock**<br />间隙锁 **Gap Lock**是为了解决幻读的，也是行锁的一种。它会锁住两个值之间的空隙【两边都是开区间】，当另一个事务去对这个锁住的间隙进行插入数据的时候就会阻塞，从而解决幻读的问题。间隙锁也是只在可重复读的级别下生效。<br />默认情况下间隙锁是开启的，`innodb_locks_unsafe_for_binlog`参数值默认是OFF，代表开启间隙锁<br />记录锁与行锁的组合：**Next key Lock【前开后闭区间】Innodb在扫描索引记录的时候会先加record lock，再对索引记录两边的间隙加上Gap lock**<br />**什么情况下会产生next-key lock?**
 
 1. **对于唯一索引**
 
-测试表记录：![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681695065933-ec8a0ab3-e714-4dd3-900e-4484b0841fbf.png#averageHue=%233c3a39&clientId=u1f4e3c3e-94be-4&from=paste&height=101&id=ueb85ca31&name=image.png&originHeight=111&originWidth=116&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=2280&status=done&style=none&taskId=u79b4f1c0-8c73-4a89-9a62-aed55edc0b1&title=&width=105.45454316887978)
+测试表记录：![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214800.png)
 
 - 当查询单条记录的时候只会产生Record lock 
 ```sql
@@ -197,17 +197,17 @@ InnoDB 里面每个事务有一个唯一的事务 ID，叫作 transaction id。�
 
 **Read View：**<br />在innodb 中每个事务开启后都会得到一个read_view。副本主要保存了当前数据库系统中正处于活跃（没有commit）的事务的ID号，其实简单的说这个副本中保存的是系统中当前不应该被本事务看到的其他事务id列表。
 
-_InnoDB 为_**_每个事务_**_构造了一个_**_数组_**_，用来保存这个事务启动瞬间，_**_当前正在“活跃”的所有事务 ID_**_。“活跃”指的就是，启动了但还没提交。_<br />_数组里面事务 ID 的最小值记为低水位，当前系统里面已经创建过的事务 ID 的最大值加 1 记为高水位。_<br />_这个视图数组和高水位，就组成了_**_当前事务的一致性视图（read-view）_**_。_<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681691971536-cfe4deb9-8c4d-49ae-bbc9-c11bf42fca9b.png#averageHue=%23f1e3d2&clientId=u1f4e3c3e-94be-4&from=paste&id=u29eb1ffb&name=image.png&originHeight=202&originWidth=541&originalType=url&ratio=1.100000023841858&rotation=0&showTitle=false&size=51024&status=done&style=none&taskId=u1ccf4a5e-fa06-4782-96be-6d72c6b4076&title=)
+_InnoDB 为_**_每个事务_**_构造了一个_**_数组_**_，用来保存这个事务启动瞬间，_**_当前正在“活跃”的所有事务 ID_**_。“活跃”指的就是，启动了但还没提交。_<br />_数组里面事务 ID 的最小值记为低水位，当前系统里面已经创建过的事务 ID 的最大值加 1 记为高水位。_<br />_这个视图数组和高水位，就组成了_**_当前事务的一致性视图（read-view）_**_。_<br />![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214826.png)
 
 ## 10、JOIN语句
-MySQL的Join语句用于连接两个或多个表，以便在结果集中检索数据。<br />![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681212217062-26cf47b0-8166-484f-87f6-085a0814a0d6.png#averageHue=%23f0f0f0&clientId=u8deef889-e8ad-4&from=paste&height=496&id=u93675d7e&name=image.png&originHeight=546&originWidth=798&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=298676&status=done&style=none&taskId=uef3a6b70-8501-4bf2-93d3-edd2f44296f&title=&width=725.454529730742)
+MySQL的Join语句用于连接两个或多个表，以便在结果集中检索数据。<br />![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214846.png)
 
 ### INNER JOIN 内连接
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681211576075-cb0498b3-5a2e-46bb-9059-677043203cb4.png#averageHue=%23cfbd87&clientId=u8deef889-e8ad-4&from=paste&height=295&id=u82ea607b&name=image.png&originHeight=324&originWidth=420&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=35067&status=done&style=none&taskId=u8c485f0e-074b-419c-bb11-da7a0f20e5a&title=&width=381.8181735424958)<br />CROSS JOIN 交叉连接  返回两个表的笛卡儿积，后面没有ON条件
+![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214901.png)<br />CROSS JOIN 交叉连接  返回两个表的笛卡儿积，后面没有ON条件
 
 
 ### OUTER JOIN 外连接
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681211824700-b61be7c3-e314-43c0-abc3-72c2965f5fe7.png#averageHue=%23f5f4f0&clientId=u8deef889-e8ad-4&from=paste&height=354&id=uc5ccda86&name=image.png&originHeight=389&originWidth=546&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=41215&status=done&style=none&taskId=u6be16247-7d4b-4dd7-85bf-673a9ad0cdb&title=&width=496.3636256052445)
+![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214921.png)
 
 1. LEFT JOIN
 
@@ -219,7 +219,7 @@ _和 LEFT JOIN 相反_
 
 3. FULL JOIN _全连接_
 
-![image.png](https://cdn.nlark.com/yuque/0/2023/png/22736215/1681212083887-548c20a5-6d6e-4fda-9b84-220b2e607398.png#averageHue=%23ccbb8c&clientId=u8deef889-e8ad-4&from=paste&height=351&id=u0442c706&name=image.png&originHeight=386&originWidth=526&originalType=binary&ratio=1.100000023841858&rotation=0&showTitle=false&size=62239&status=done&style=none&taskId=u185fb189-6daf-4d13-87f6-30747ad7315&title=&width=478.18180781750664)
+![](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/20230423214937.png)
 
 ## 11、Innodb和MyISAM引擎区别
 
