@@ -119,17 +119,7 @@ export const zhSidebar = sidebar({
       ]
     },
     {
-      text: "面试&难点",
-      icon: "read",
-      collapsible: true,
-      prefix: "/codenotes/work/",
-      children: [
-        "面试.md",
-        "分布式ID.md"
-      ],
-    },
-    {
-      text: "在线技术文档",
+      text: "优质站点推荐",
       icon: "read",
       collapsible: true,
       prefix: "/codenotes/cookbook/",
