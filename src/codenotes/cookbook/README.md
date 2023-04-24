@@ -47,6 +47,7 @@ timeline: false
 - [后端HTTP框架Forest](https://forest.dtflyx.com/)
 - [Mybatis中文网](https://mybatis.net.cn/)
 - [凤凰架构](https://icyfenix.cn/)⭐⭐
+- [JVM总结](https://doocs.gitee.io/jvm/)
 
 ## 优质博客站点
 
