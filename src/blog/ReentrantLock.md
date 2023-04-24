@@ -17,8 +17,6 @@ article: true
 # 是否将该文章添加至时间线中
 timeline: true
 ---
-
-
 ### ReentrantLock 和 公平锁
 
 ReentrantLock 是基于 Lock 实现的可重入锁，所有的 Lock 都是基于 AQS 实现的。
@@ -27,7 +25,7 @@ AQS是通过将每条请求共享资源的线程封装成一个节点来实现�
 
 它的可重入是因为实现了同步器 Sync，这个抽象类 Sync 继承了AQS，在 Sync 的两个实现类中，包括了公平锁和非公平锁。
 
-![img.png](imgs/img1.png)
+![img.png](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/img1.png)
 
 同步器 Sync 继承自 AbstractQueuedSynchronizer 抽象队列同步器
 
@@ -37,7 +35,7 @@ ReentrantLock默认是非公平锁，在构造函数中传入true 构建公平�
 public ReentrantLock() {
         sync = new NonfairSync();
 }
-    
+  
 public ReentrantLock(boolean fair) {
      sync = fair ? new FairSync() : new NonfairSync();
 }
@@ -47,7 +45,7 @@ public ReentrantLock(boolean fair) {
 
 ### CLH 基于单向链表的公平锁
 
-![CLH.png](imgs/clh.png)
+![CLH.png](https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/clh.png)
 
 ```java
 public class CLHLock implements Lock {
@@ -89,9 +87,7 @@ public class CLHLock implements Lock {
 }
 ```
 
-
-
-### MCS 
+### MCS
 
 和CLH一样也是一种基于链表的可扩展、高性能、公平的自旋锁
 
@@ -147,8 +143,6 @@ public class MCSLock implements Lock {
 }
 ```
 
-
-
 ### TicketLock
 
 TicketLock 就像你去银行、呷哺给你的一个排号卡一样，叫到你号你才能进去。属于严格的公平性实现，但是多处理器系统上，每个进程/线程占用的处理器都在读写同一个变量，每次读写操作都需要进行多处理间的缓存同步，非常消耗系统性能。
@@ -177,6 +171,3 @@ public class TicketLock implements Lock {
 	...
 }
 ```
-
-
-
