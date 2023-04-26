@@ -9,6 +9,8 @@ actions:
   - text: 【快速导航】
     link: /quicknav/
     type: primary
+  - text: 【博客主页】
+    link: /blog/
   - text: 【代码笔记】
     link: /codenotes/
   - text: 【开源项目】
@@ -20,7 +22,4 @@ actions:
 
 - 😊这里记录了我的学习笔记和心得
 - 如果有错误欢迎指出和我联系：zql46@outlook.com
-- 如果对你有帮助可以请我喝杯奶茶
 
-
-<img src="https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/f443948e46f3239438e9de7f96bd9c1.jpg" style="width:200px; height:200px">
