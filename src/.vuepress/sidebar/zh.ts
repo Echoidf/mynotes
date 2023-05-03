@@ -51,17 +51,7 @@ export const zhSidebar = sidebar({
         }
       ],
     },
-    {
-      text: "算法和数据结构",
-      icon: "ability",
-      collapsible: true,
-      prefix: "/codenotes/algdata/",
-      children: [
-        "算法小抄数学运算.md",
-        "算法小抄数据结构.md",
-        "算法小抄高频面试.md"
-      ],
-    },
+
     {
       text: "数据库",
       icon: "mysql",
@@ -99,6 +89,17 @@ export const zhSidebar = sidebar({
       ],
     },
     {
+      text: "算法和数据结构",
+      icon: "ability",
+      collapsible: true,
+      prefix: "/codenotes/algdata/",
+      children: [
+        "算法小抄数学运算.md",
+        "算法小抄数据结构.md",
+        "算法小抄高频面试.md"
+      ],
+    },
+    {
       text: "云计算",
       icon: "computer",
       collapsible: true,
@@ -107,6 +108,16 @@ export const zhSidebar = sidebar({
         "clickhouse.md",
         "hadoop.md"
       ],
+    },
+
+    {
+      text: "Docker",
+      icon: "docker",
+      collapsible: true,
+      prefix: "/codenotes/docker/",
+      children: [
+        "Docker安装使用.md"
+      ]
     },
     {
       text: "web",
