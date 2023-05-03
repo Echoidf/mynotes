@@ -116,7 +116,8 @@ export const zhSidebar = sidebar({
       collapsible: true,
       prefix: "/codenotes/docker/",
       children: [
-        "Docker安装使用.md"
+        "Docker安装使用.md",
+        "Docker安装Nginx.md"
       ]
     },
     {
