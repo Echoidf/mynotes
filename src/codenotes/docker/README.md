@@ -1,7 +1,6 @@
 ---
 # 当前页面内容标题
 title: Docker学习使用
-# 当前页面图标
 icon: docker
 # 分类
 category:
