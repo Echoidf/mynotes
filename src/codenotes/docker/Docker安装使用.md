@@ -29,11 +29,9 @@ containerd.io
 
 > containerd 可用作 Linux 和 Windows 的守护程序。 它管理其主机系统的完整容器[生命周期]()，从图像传输和存储到容器执行和监督，再到低级存储到网络附件等等。
 
-
 docker-ce-cli
 
 > docker 引擎的命令行界面，社区版
-
 
 docker-ce
 
@@ -162,7 +160,7 @@ Docker version 20.10.11, build dea9396
 ### 9. 卸载 Docker
 
 ```java
-[root@CodeGuide ~]# sudo yum remove docker \
+sudo yum remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -209,7 +207,7 @@ mkdir -p /data/portainer/data /data/portainer/public
 ### 3. 拉取最新的 Portainer
 
 ```java
-[root@CodeGuide portainer]# docker pull portainer/portainer
+docker pull portainer/portainer
 Using default tag: latest
 latest: Pulling from portainer/portainer
 94cfa856b2b1: Pull complete 
@@ -228,15 +226,13 @@ docker.io/portainer/portainer:latest
 -d后台运行  --name 命名 -p 端口映射(需要确认端口号是开放的)   -v挂载
 
 ```java
-[root@CodeGuide portainer]# docker run -d 
---restart=always 
---name portainer 
--p 9000:9000 
--v /var/run/docker.sock:/var/run/docker.sock 
--v /data/portainer/data:/data 
--v /data/portainer/public:/public portainer/portainer
-
-a29864c820494afe3e465ce9b58e686851f5c6526532fe52fc4b83c1cc0b705e
+docker run -d -p 9000:9000 \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+   -v /data/portainer/data:/data \
+    --privileged=true \
+    --name portainer \
+    portainer/portainer
 ```
 
 ### 5. 访问 Portainer
