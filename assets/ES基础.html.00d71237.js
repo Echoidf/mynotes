@@ -1,0 +1,110 @@
+import{_ as i}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as l,c as p,a as n,b as s,d as e,e as t,r as c}from"./app.f5fb0004.js";const o={},u=t('<h2 id="一、核心概念" tabindex="-1"><a class="header-anchor" href="#一、核心概念" aria-hidden="true">#</a> 一、核心概念</h2><ul><li>ES-&gt;数据库</li><li>索引index-&gt;表</li><li>文档document-&gt;行（记录）</li><li>字段fields-&gt;列</li></ul><h3 id="集群相关" tabindex="-1"><a class="header-anchor" href="#集群相关" aria-hidden="true">#</a> 集群相关</h3><ul><li><p>分片(sard)：把索引库拆分为多份，分别放在不同的节点上，比如有3个节点，3个节点的所有数据内容加在一起是一个完整的索引库。分别保存到三个节点上，目的为了水平扩展，提高吞吐量。</p></li><li><p>备份(replica):每个shard的备份。</p><p><strong>简称</strong> shard = primary shard(主分片) replica = replica shard(备份节点)</p></li></ul><h2 id="二、倒排索引" tabindex="-1"><a class="header-anchor" href="#二、倒排索引" aria-hidden="true">#</a> 二、倒排索引</h2><ol><li>倒排索引源于实际应用中需要根据属性的值来查找记录;</li><li>这种索引表中的每一项都包括一个属性和包含该属性值的各个记录地址;</li><li>由于不是根据记录来确定属性(key确定value),而是根据属性来确定记录的位置(value确定key)</li></ol><p><img src="https://s2.loli.net/2023/03/10/LBqi5h21xkKM3jO.png" alt="image.png"></p><h2 id="三、elasticsearch下载安装" tabindex="-1"><a class="header-anchor" href="#三、elasticsearch下载安装" aria-hidden="true">#</a> 三、ElasticSearch下载安装</h2>',8),d={href:"https://www.elastic.co/cn/downloads/elasticsearch",target:"_blank",rel:"noopener noreferrer"},r={href:"https://www.elastic.co/guide/cn/elasticsearch/guide/current/_cluster_health.html#_cluster_health",target:"_blank",rel:"noopener noreferrer"},m={href:"https://www.cnblogs.com/qubernet/p/16849818.html",target:"_blank",rel:"noopener noreferrer"},k=t(`<p>注意：需要设置环境变量，因为7.x版本自带了jdk：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token assign-left variable">ES_JAVA_HOME</span><span class="token operator">=</span>C:<span class="token punctuation">\\</span>Users<span class="token punctuation">\\</span><span class="token number">86188</span><span class="token punctuation">\\</span>Documents<span class="token punctuation">\\</span>java-study<span class="token punctuation">\\</span>software<span class="token punctuation">\\</span>elasticsearch-7.4.2<span class="token punctuation">\\</span>jdk
+<span class="token assign-left variable">ES_HOME</span><span class="token operator">=</span>C:<span class="token punctuation">\\</span>Users<span class="token punctuation">\\</span><span class="token number">86188</span><span class="token punctuation">\\</span>Documents<span class="token punctuation">\\</span>java-study<span class="token punctuation">\\</span>software<span class="token punctuation">\\</span>elasticsearch-7.4.2
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div></div></div><p>7.x版本点击 <code>bin/elasticsearch.bat</code>启动程序</p><blockquote><p>如果出现启动错误，显示 <code>Unrecognized VM option &#39;UseConcMarkSweepGC</code>，将config/jvm.options文件中GC configruation下面三行注释掉</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token comment">##GC configuration</span>
+<span class="token comment">#-XX:+UseConcMarkSweepGC</span>
+<span class="token comment">#-XX:CMSInitiatingOccupancyFraction=75</span>
+<span class="token comment">#-XX:+UseCMSInitiatingOccupancyOnly</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></blockquote><p>可以在浏览器安装elasticsearch-head插件进行图形可视化界面的操作</p><h2 id="三、基本restfull接口" tabindex="-1"><a class="header-anchor" href="#三、基本restfull接口" aria-hidden="true">#</a> 三、基本RestFull接口</h2><h3 id="_1、主要数据类型" tabindex="-1"><a class="header-anchor" href="#_1、主要数据类型" aria-hidden="true">#</a> 1、主要数据类型</h3><ul><li>text,keyword,string</li><li>long,integer,short,byte</li><li>double,float</li><li>boolean</li><li>date</li><li>object</li><li>数组不能混，类型一致</li></ul><p>注意：</p><ul><li>text：文字类需要被分词被倒排索引的内容，比如商品名称，商品详情，商品介绍，使用text。</li><li>keyword：<strong><code>&lt;mark&gt;</code>不会被分词，不会被倒排索引，直接匹配搜索<code>&lt;/mark&gt;</code></strong>，比如订单状态，用户qq,微信号，手机号等，这些精确匹配，无需分词。</li></ul><h3 id="_2、索引" tabindex="-1"><a class="header-anchor" href="#_2、索引" aria-hidden="true">#</a> 2、索引</h3><p>相当于数据库中的表</p><div class="language-sql line-numbers-mode" data-ext="sql"><pre class="language-sql"><code><span class="token comment"># 创建索引</span>
+PUT    <span class="token operator">/</span>index_name
+{
+    <span class="token string">&quot;settings&quot;</span>: {
+        <span class="token string">&quot;index&quot;</span>: {
+            <span class="token string">&quot;number_of_shards&quot;</span>: <span class="token string">&quot;2&quot;</span><span class="token punctuation">,</span>  <span class="token comment">#设置主分片数量，默认5</span>
+            <span class="token string">&quot;number_of_replicas&quot;</span>: <span class="token string">&quot;0&quot;</span> <span class="token comment">#设置副本数量，默认1</span>
+        }
+    }
+}
+
+
+<span class="token comment">#查看索引</span>
+GET     _cat<span class="token operator">/</span>indices?v
+<span class="token comment">#删除索引</span>
+<span class="token keyword">DELETE</span>    <span class="token operator">/</span>index_name
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>索引的mapping动态映射</p><p>可以在创建索引时同时创建mappings</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>PUT     /index_name
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;mappings&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;properties&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;realname&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;text&quot;</span>,
+                <span class="token string">&quot;index&quot;</span><span class="token builtin class-name">:</span> <span class="token boolean">true</span>  <span class="token comment">#设置该字段会被索引，默认就是true</span>
+            <span class="token punctuation">}</span>,
+            <span class="token string">&quot;username&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+                <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;keyword&quot;</span>,
+                <span class="token string">&quot;index&quot;</span><span class="token builtin class-name">:</span> <span class="token boolean">false</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>为已存在的索引创建mappings：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>POST        /index_name/_mapping
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;properties&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;id&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;long&quot;</span>
+        <span class="token punctuation">}</span>,
+        <span class="token string">&quot;age&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;integer&quot;</span>
+        <span class="token punctuation">}</span>,
+        <span class="token string">&quot;nickname&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;keyword&quot;</span>
+        <span class="token punctuation">}</span>,
+        <span class="token string">&quot;birthday&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;date&quot;</span>
+        <span class="token punctuation">}</span>,
+        <span class="token string">&quot;relationship&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;object&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>无法修改索引mappings，某个属性一旦被建立就无法修改，但是可以新增字段：</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code>POST        /index_name/_mapping
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;properties&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+               <span class="token string">&quot;type&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;long&quot;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h3 id="_3、文档" tabindex="-1"><a class="header-anchor" href="#_3、文档" aria-hidden="true">#</a> 3、文档</h3><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token comment">## 创建文档</span>
+POST     /index_name/_doc/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;id&quot;</span><span class="token builtin class-name">:</span> <span class="token number">1001</span>,
+    <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;docs_test&quot;</span>,
+    <span class="token string">&quot;desc&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;I&#39;m creating my doc!&quot;</span>,
+    <span class="token string">&quot;create_date&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;2023-03-11&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>如果索引没有手动建立mapping，那么插入文档数据时，会根据文档类型自动设置属性类型。这个就是es动态映射，帮我们在index索引库中去建立数据结构的相关配置。</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token comment">## 删除文档</span>
+DELETE    /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+
+<span class="token comment">## 修改文档</span>
+POST     /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>/_update
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;doc&quot;</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;name&quot;</span><span class="token builtin class-name">:</span> <span class="token string">&quot;updated_name&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这里的删除文档只是逻辑删除，只有当内存空间不够时才会触发被动清理，真正从磁盘删除</p><p>每次修改后，version会自增</p><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token comment">## 查询文档</span>
+GET /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>
+GET /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/_search
+
+<span class="token comment">##定制结果集</span>
+GET /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/<span class="token punctuation">{</span>id<span class="token punctuation">}</span>?_source<span class="token operator">=</span>id,name
+GET /<span class="token punctuation">{</span>index_name<span class="token punctuation">}</span>/_doc/_search?_source<span class="token operator">=</span>id,name
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>&lt;mark&gt;</code>文档乐观锁控制 <code>&lt;/mark&gt;if_seq_no</code> 和 <code>if_primary_term</code></p><ul><li>_seq_no：文档版本号，作用同_version</li><li>primary term：文档所在位置</li></ul><h2 id="四、分词器" tabindex="-1"><a class="header-anchor" href="#四、分词器" aria-hidden="true">#</a> 四、分词器</h2><p>ES内置分词器：</p><ul><li>standard ：默认分词，单词会被拆分，大小写会转换小写。</li><li>simple：按照非字母分词。大写会转为小写。</li><li>whitespace :按照空格分词。忽略大小写。</li><li>stop: 去除无意义单词。比如the/a/an/is...</li><li>keyword：不做分词。把整个文本作为一个单独的关键词</li></ul><div class="language-sql line-numbers-mode" data-ext="sql"><pre class="language-sql"><code>POST <span class="token operator">/</span>{index_name}<span class="token operator">/</span>_analyze
+{
+    <span class="token string">&quot;analyzer&quot;</span>: <span class="token string">&quot;standard&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;field&quot;</span>: <span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;text&quot;</span>: <span class="token string">&quot;text文本&quot;</span>
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>IK中文分词器</p>`,34),v={href:"https://github.com/medcl/elasticsearch-analysis-ik",target:"_blank",rel:"noopener noreferrer"},b=t(`<p>analyzer可设置为：</p><ul><li>ik_max_word：最细粒度划分</li><li>ik_smart：会做最粗粒度的拆分</li></ul><h2 id="五、自定义中文词库" tabindex="-1"><a class="header-anchor" href="#五、自定义中文词库" aria-hidden="true">#</a> 五、自定义中文词库</h2><p>修改 <code>plugins/ik/config</code> 下的<code>&lt;mark&gt;</code>IKAnalyzer.cfg.xml<code>&lt;/mark&gt;</code>文件，进行配置</p><div class="language-xml line-numbers-mode" data-ext="xml"><pre class="language-xml"><code><span class="token prolog">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">properties</span> <span class="token name">SYSTEM</span> <span class="token string">&quot;http://java.sun.com/dtd/properties.dtd&quot;</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>properties</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>comment</span><span class="token punctuation">&gt;</span></span>IK Analyzer 扩展配置<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>comment</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--用户可以在这里配置自己的扩展字典 --&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>entry</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ext_dict<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>custom.dic<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>entry</span><span class="token punctuation">&gt;</span></span>
+     <span class="token comment">&lt;!--用户可以在这里配置自己的扩展停止词字典--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>entry</span> <span class="token attr-name">key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ext_stopwords<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>entry</span><span class="token punctuation">&gt;</span></span>
+    <span class="token comment">&lt;!--用户可以在这里配置远程扩展字典 --&gt;</span>
+    <span class="token comment">&lt;!-- &lt;entry key=&quot;remote_ext_dict&quot;&gt;words_location&lt;/entry&gt; --&gt;</span>
+    <span class="token comment">&lt;!--用户可以在这里配置远程扩展停止词字典--&gt;</span>
+    <span class="token comment">&lt;!-- &lt;entry key=&quot;remote_ext_stopwords&quot;&gt;words_location&lt;/entry&gt; --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>properties</span><span class="token punctuation">&gt;</span></span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在  <code>plugins/ik/config</code> 下创建custom.dic，添加需要的自定义中文分词即可</p>`,6);function g(h,q){const a=c("ExternalLinkIcon");return l(),p("div",null,[u,n("p",null,[s("官网："),n("a",d,[s("https://www.elastic.co/cn/downloads/elasticsearch"),e(a)])]),n("p",null,[s("教程文档："),n("a",r,[s("https://www.elastic.co/guide/cn/elasticsearch/guide/current/_cluster_health.html#_cluster_health"),e(a)])]),n("p",null,[s("参考文档："),n("a",m,[s("ElasticSearch之Windows中环境安装 - Qubernet - 博客园 (cnblogs.com)"),e(a)])]),k,n("p",null,[s("下载地址："),n("a",v,[s("GitHub - medcl/elasticsearch-analysis-ik: The IK Analysis plugin integrates Lucene IK analyzer into elasticsearch, support customized dictionary."),e(a)])]),b])}const y=i(o,[["render",g],["__file","ES基础.html.vue"]]);export{y as default};
