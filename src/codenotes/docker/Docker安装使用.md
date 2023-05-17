@@ -14,12 +14,7 @@ star: 37
 article: true
 timeline: true
 ---
-## 一、运维日志
-
-- 在云服务器上部署 Docker，并安装 Portainer 运维面板
-- 服务器系统 CentOS 7.9、Docker 20.10.11
-
-## 二、手动安装 Docker
+## 一、手动安装 Docker
 
 Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。
 
@@ -159,18 +154,18 @@ Docker version 20.10.11, build dea9396
 
 ### 9. 卸载 Docker
 
-```java
-sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
-                  docker-engine
-```
+1. 查看当前docker状态
+
+   `systemctl satus docker`如果是开启状态就先关闭：`systemctl stop docker`
+
+2. 查看yum安装的docker文件
+
+   ` yum list installed |grep docker`
+
+   删除掉相关文件：`yum remove -y [filename]`
+
+3. 删除docker镜像文件：`rm -rf /var/lib/docker`
+
 
 ### 10. Docker 常用命令
 
@@ -194,17 +189,10 @@ sudo yum remove docker \
 ### 1. 创建目录
 
 ```java
-mkdir -p /data/portainer/data /data/portainer/public
+mkdir -p /data/portainer/data
 ```
 
-- 创建一个 portainer 下的 public 文件夹
-
-### 2. SFTP 链接服务器
-
-- 在 IDEA 中使用 Tools 工具配置 SFTP 用于链接服务器，上传我们的汉化包文件
-- 当然你也可以使用 wget 地址 的方式进行下载并解压
-
-### 3. 拉取最新的 Portainer
+### 2. 拉取最新的 Portainer
 
 ```java
 docker pull portainer/portainer
@@ -221,7 +209,7 @@ docker.io/portainer/portainer:latest
 - docker pull portainer/portainer
 - 拉取 portainer
 
-### 4. 安装和启动
+### 3. 安装和启动
 
 -d后台运行  --name 命名 -p 端口映射(需要确认端口号是开放的)   -v挂载
 
