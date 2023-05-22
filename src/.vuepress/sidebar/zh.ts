@@ -128,13 +128,13 @@ export const zhSidebar = sidebar({
       children: [
         "introduction.md",
         "what-is-graphql.md",
+        "graphql-vs-rest.md",
         "core-concepts.md",
         "graphql-client.md",
-        "graphql-mutations.md",
-        "graphql-queries.md",
         "graphql-server.md",
+        "graphql-queries.md",
+        "graphql-mutations.md",
         "graphql-subscriptions.md",
-        "graphql-vs-rest.md",
         "what-next.md",
       ]
     },
