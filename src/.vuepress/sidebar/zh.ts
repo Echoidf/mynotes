@@ -121,6 +121,24 @@ export const zhSidebar = sidebar({
       ]
     },
     {
+      text: "GraphQL",
+      icon: "computer",
+      collapsible: true,
+      prefix: "/codenotes/graphql/",
+      children: [
+        "introduction.md",
+        "what-is-graphql.md",
+        "core-concepts.md",
+        "graphql-client.md",
+        "graphql-mutations.md",
+        "graphql-queries.md",
+        "graphql-server.md",
+        "graphql-subscriptions.md",
+        "graphql-vs-rest.md",
+        "what-next.md",
+      ]
+    },
+    {
       text: "web",
       icon: "vue",
       collapsible: true,
