@@ -227,3 +227,10 @@ docker run -d -p 9000:9000 \
 
 - 地址：http://ip:9000/
 - 操作：登录后设置你的用户名和密码，并设置本地Docker即可，设置完成后，如下
+
+## 三、其他
+
+### 1.docker安装mongodb
+
+[脚本之家|docker安装mongodb](https://www.jb51.net/article/271689.htm)
+

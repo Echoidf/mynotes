@@ -29,6 +29,7 @@ timeline: false
 * [animate|css效果](https://animate.style/)
 * [gsap](https://greensock.com/)
 * [渐变色css](https://uigradients.com/)
+* [particles粒子动效](https://github.com/VincentGarreau/particles.js/)
 
 ## 后端
 
