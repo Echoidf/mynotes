@@ -302,7 +302,13 @@ public class JedisClusterUse {
 ### 2、缺点
 
 - 多键操作是不被支持的
-- 多键的 Redis 事务是不被支持的。lua 脚本不被支持
+- 多键的 Redis 事务是不被支持的。
+- lua脚本有限制，使用的 key 必须在同一个槽位，为了保持事务，同一个lua脚本访问应该访问同一个slot，但是redis集群会根据KEY进行hash并取模，因此如果采用默认hash的话，就会出现`command keys must in same slot`错误
+
+  解决方案： redis支持写法，可以实现对KEY的部分字符串进行hash，这样就能保证同一个lua脚本被同一个slot执行，从而保持事务的一致性。
+
+  eg. 三个key {top}_turnover_rate，{top}_rank,coin_{top}_coin 会按 crc16(top) % 16384 的方式取模
+
 - 由于集群方案出现较晚，很多公司已经采用了其他的集群方案，而其它方案想要迁移 至 redis cluster，需要整体迁移而不是逐步过渡，复杂度较大
 
 
