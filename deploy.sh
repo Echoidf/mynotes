@@ -17,3 +17,7 @@ git commit -m "$msg"
 
 # 推送到远程仓库
 git push origin main
+
+remote_url=$(git remote get-url origin)
+https_url=$(echo "$remote_url" | sed -e 's/git@\(.*\):\(.*\)/https:\/\/\1\/\2/')
+echo "HTTPS Remote URL: $https_url"
