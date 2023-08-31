@@ -10,9 +10,24 @@ export const zhSidebar = sidebar({
       prefix: "/codenotes/javacore/",
       children: [
         {
-          text: "Java8新特性",
+          text: "Java8新特性之Optional类",
           icon: "write",
-          link: "Java8新特性.md",
+          link: "Java8新特性之Optional类.md",
+        },
+        {
+          text: "java排序源码解读",
+          icon: "write",
+          link: "java排序源码解读.md",
+        },
+        {
+          text: "Java数据校验",
+          icon: "write",
+          link: "Java数据校验.md",
+        },
+        {
+          text: "使用CompletableFuture进行异步任务编排",
+          icon: "write",
+          link: "使用CompletableFuture进行异步任务编排.md",
         },
       ]
     },
