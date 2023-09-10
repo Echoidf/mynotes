@@ -29,8 +29,36 @@ export const zhSidebar = sidebar({
           icon: "write",
           link: "使用CompletableFuture进行异步任务编排.md",
         },
+        {
+          text: "使用Transmittable-Thread-Local作为线程上下文传递解决方案",
+          icon: "write",
+          link: "使用Transmittable-Thread-Local作为线程上下文传递解决方案.md"
+        }
       ]
     },
+    {
+      text: "Spring",
+      icon: "java",
+      collapsible: true,
+      prefix: "/codenotes/spring/",
+      children: [
+        {
+          text: "Spring感知类",
+          icon: "write",
+          link: "Spring感知类.md",
+        },
+        {
+          text: "借助Spring实现策略模式",
+          icon: "write",
+          link: "借助Spring实现策略模式.md",
+        },
+        {
+          text: "使用SpringEvent进行服务内部发布订阅",
+          icon: "write",
+          link: "使用SpringEvent进行服务内部发布订阅.md",
+        }
+      ]
+    }
     {
       text: "Java虚拟机",
       icon: "engine",
@@ -111,7 +139,8 @@ export const zhSidebar = sidebar({
       children: [
         "算法小抄数学运算.md",
         "算法小抄数据结构.md",
-        "算法小抄高频面试.md"
+        "算法小抄高频面试.md",
+        "马拉车算法求解最长回文子串.md"
       ],
     },
     {
