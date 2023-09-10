@@ -58,7 +58,7 @@ export const zhSidebar = sidebar({
           link: "使用SpringEvent进行服务内部发布订阅.md",
         }
       ]
-    }
+    },
     {
       text: "Java虚拟机",
       icon: "engine",
