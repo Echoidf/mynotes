@@ -173,9 +173,6 @@ public class Context {
     @Resource
     private List<Strategy> strategyList;
 
-    /**
-     * 抽奖策略组
-     */
     protected static Map<Integer, Strategy> strategyGroup = new ConcurrentHashMap<>();
 
     @PostConstruct
