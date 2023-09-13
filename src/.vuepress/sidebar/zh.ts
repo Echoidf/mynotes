@@ -37,6 +37,19 @@ export const zhSidebar = sidebar({
       ]
     },
     {
+      text: "计算机基础",
+      icon: "computer",
+      collapsible: true,  
+      prefix: "/codenotes/cs/",
+      children: [
+        {
+          text: "从网卡到程序之间的数据流转过程",
+          icon: "write",
+          link: "从网卡到程序之间的数据流转过程.md",
+        },
+      ]
+    },
+    {
       text: "Spring",
       icon: "java",
       collapsible: true,
