@@ -33,6 +33,11 @@ export const zhSidebar = sidebar({
           text: "使用Transmittable-Thread-Local作为线程上下文传递解决方案",
           icon: "write",
           link: "使用Transmittable-Thread-Local作为线程上下文传递解决方案.md"
+        },
+        {
+          text: "使用BitSet高效处理位数据",
+          icon: "write",
+          link: "使用BitSet高效处理位数据.md"
         }
       ]
     },
