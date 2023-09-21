@@ -94,7 +94,7 @@ export default hopeTheme({
 
       // 页面配置信息
       metaLocales: {
-        editLink: "在【Gitee】上编辑此页",
+        editLink: "在【Github】上编辑此页",
       },
     },
   },
@@ -110,7 +110,7 @@ export default hopeTheme({
     description: "你是无意穿堂风 偏偏孤倨引山洪",
     // 社交媒体
     medias: {
-      Gitee: "https://gitee.com/oucystong",
+      Gitee: "https://github.com/Echoidf",
     },
     // 博客的侧边栏设置
     sidebarDisplay: "mobile",

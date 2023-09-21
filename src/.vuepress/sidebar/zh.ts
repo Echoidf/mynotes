@@ -174,7 +174,7 @@ export const zhSidebar = sidebar({
 
     {
       text: "Docker",
-      icon: "docker",
+      icon: "engine",
       collapsible: true,
       prefix: "/codenotes/docker/",
       children: [
@@ -208,6 +208,15 @@ export const zhSidebar = sidebar({
       children: [
         "vue钩子函数.md",
         "分页操作详解.md"
+      ]
+    },
+    {
+      text: "Golang",
+      icon: "note",
+      collapsible: true,
+      prefix: "/codenotes/go/",
+      children: [
+        "一图搞懂GMP模型.md"
       ]
     },
     {

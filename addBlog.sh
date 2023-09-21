@@ -12,21 +12,18 @@ if [ ! -z "$folder" ]; then
 fi 
 
 # 拼接最终路径  
-dir="/Volumes/OS 2/proj/mynotes/src/$default_folder"
+dir="/Volumes/OS 1/mynotes/src/$default_folder"
 md_path="$dir/${md_file}"
 
 # 创建目录结构
 mkdir -p $dir
 
-# 生成 md 文件
-touch $md_path
-
-rm -rf ./2
+rm -rf ./1
 
 # 写入模板内容 
-cat <<EOF >$md_path
+cat << EOF > $md_path
 ---
-title: $md_file  
+title: ${md_file%.*}  
 icon: edit
 # 分类  
 category:
@@ -42,7 +39,4 @@ article: true
 # 添加到时间线 
 timeline: true
 ---
-
-$md_file
---------  
-
+EOF
