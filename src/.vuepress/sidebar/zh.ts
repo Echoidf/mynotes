@@ -216,7 +216,8 @@ export const zhSidebar = sidebar({
       collapsible: true,
       prefix: "/codenotes/go/",
       children: [
-        "一图搞懂GMP模型.md"
+        "一图搞懂GMP模型.md",
+        "gRpc使用快速入门.md"
       ]
     },
     {
