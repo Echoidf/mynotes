@@ -1,1 +1,0 @@
-import{_ as s}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as t,c as o,a as e}from"./app.5105a258.js";const _={},n=e("p",null,[e("img",{src:"https://zql-oss1.oss-cn-nanjing.aliyuncs.com/notes/GMP模型.png",alt:"GMP模型"})],-1),c=[n];function a(r,l){return t(),o("div",null,c)}const f=s(_,[["render",a],["__file","一图搞懂GMP模型.html.vue"]]);export{f as default};

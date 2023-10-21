@@ -1,0 +1,16 @@
+import{_ as n}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as a,c as s,b as e}from"./app.7b0c1160.js";const i={},t=e(`<h3 id="_1、docker安装nginx命令" tabindex="-1"><a class="header-anchor" href="#_1、docker安装nginx命令" aria-hidden="true">#</a> 1、docker安装Nginx命令</h3><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token function">docker</span> run  <span class="token parameter variable">--restart</span> always <span class="token parameter variable">--name</span> Nginx <span class="token parameter variable">-d</span> <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 nginx
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h3 id="_2、nginx容器目录映射到服务器-本地" tabindex="-1"><a class="header-anchor" href="#_2、nginx容器目录映射到服务器-本地" aria-hidden="true">#</a> 2、Nginx容器目录映射到服务器/本地</h3><div class="language-bash line-numbers-mode" data-ext="sh"><pre class="language-bash"><code><span class="token function">docker</span> container <span class="token function">cp</span> Nginx:/etc/nginx/nginx.conf  /data/nginx/conf
+
+<span class="token function">docker</span> container <span class="token function">cp</span> Nginx:/etc/nginx/conf.d/default.conf  /data/nginx/conf/conf.d
+
+<span class="token function">docker</span> container <span class="token function">cp</span> Nginx:/usr/share/nginx/html/index.html /data/nginx/html
+
+<span class="token function">docker</span> run <span class="token parameter variable">--name</span> Nginx <span class="token parameter variable">-p</span> <span class="token number">80</span>:80 <span class="token punctuation">\\</span>
+	<span class="token parameter variable">-v</span> /data/nginx/logs:/var/log/nginx <span class="token punctuation">\\</span>
+	<span class="token parameter variable">-v</span> /data/nginx/html:/usr/share/nginx/html <span class="token punctuation">\\</span>
+	<span class="token parameter variable">-v</span> /data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf <span class="token punctuation">\\</span>
+	<span class="token parameter variable">-v</span> /data/nginx/conf/conf.d:/etc/nginx/conf.d <span class="token punctuation">\\</span>
+	<span class="token parameter variable">-v</span> /data/nginx/ssl:/etc/nginx/ssl/ <span class="token punctuation">\\</span>
+	<span class="token parameter variable">--privileged</span><span class="token operator">=</span>true <span class="token parameter variable">-d</span> <span class="token parameter variable">--restart</span><span class="token operator">=</span>always nginx
+
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div>`,4),c=[t];function r(l,o){return a(),s("div",null,c)}const v=n(i,[["render",r],["__file","Docker安装Nginx.html.vue"]]);export{v as default};
