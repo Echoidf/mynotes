@@ -12,7 +12,7 @@ if [ ! -z "$folder" ]; then
 fi 
 
 # 拼接最终路径  
-dir="/Volumes/OS 1/mynotes/src/$default_folder"
+dir="/Volumes/OS/mynotes/src/$default_folder"
 md_path="$dir/${md_file}"
 
 # 创建目录结构

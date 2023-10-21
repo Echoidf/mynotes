@@ -91,29 +91,6 @@ export const zhSidebar = sidebar({
       ],
     },
     {
-      text: "企业级框架",
-      icon: "frame",
-      collapsible: true,
-      prefix: "/codenotes/framework/",
-      children: [
-        {
-          text: "Netty",
-          icon: "network",
-          collapsible: true,
-          prefix: "netty/",
-          children: ["Netty核心.md", "Netty高级.md"],
-        },
-        {
-          text: "ElasticSearch",
-          icon: "network",
-          collapsible: true,
-          prefix: "ES/",
-          children: ["ES基础.md", "DSL搜索.md"],
-        }
-      ],
-    },
-
-    {
       text: "数据库",
       icon: "mysql",
       collapsible: true,
