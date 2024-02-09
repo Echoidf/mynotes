@@ -1,0 +1,26 @@
+import{_ as s}from"./_plugin-vue_export-helper.cdc0426e.js";import{o as r,c as i,a as e,d as a,e as l,b as d,r as t}from"./app.193c9a2b.js";const c={},p=d(`<p>GraphQL 因其客户端优势而闻名。 GraphQL 服务器进行繁重的工作，以确保借助最少的数据库查找和 API 调用来获取适当数量的数据。</p><p>GraphQL 请求已由服务器<code>executed</code>，并且包含以下信息： GraphQL 服务的模式、GraphQL 文档（其中包含选择集和字段等操作定义）。</p><p>服务器执行以下步骤：</p><ul><li>解析文档</li><li>确定要执行的操作（如果多于 1 个）</li><li>验证请求并在失败时返回错误</li><li>执行操作（查询/变更/订阅）</li></ul><p>编写 GraphQL 服务器有很多方式。 来看一下 GraphQL 社群最常使用的方式。</p><h2 id="resolver-approach" tabindex="-1"><a class="header-anchor" href="#resolver-approach" aria-hidden="true">#</a> 解析器方式</h2><p>编写 GraphQL 服务器最常见的方式是通过定义模式，并为不同的操作和字段编写解析器。</p><p>将解析器想象成包含如何根据上下文处理特定字段的指令的函数。</p><p>解析器的基本签名如下所示：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>resolverFunc(data, args, context, info)
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><ul><li><code>data</code>- 先前从父级抓取的数据。</li><li><code>args</code>- 参数的键值对，可选。</li><li><code>context</code>- 每个请求的状态信息，通常用于身份验证逻辑</li><li><code>info</code>- 关于遍历选择上下文的元数据。</li></ul><p>现已为 GraphQL 查询中的每个字段执行该解析器功能。</p><h3 id="performance-problem" tabindex="-1"><a class="header-anchor" href="#performance-problem" aria-hidden="true">#</a> N+1 性能问题</h3><p>假设我必须抓取作者及其文章列表。 在简单的 REST API 中，朴素版本类似于：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>fetchData: async () =&gt; ORM.getAuthors().getArticles();
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>对数据库的 (SQL) 查询有两个 - 一个是为了抓取作者列表，另一个是为了抓取每个作者的文章列表。</p><p>现在，使用 GraphQL 进行该操作。</p><p>这里的 GraphQL 查询类似于：</p><div class="language-graphql line-numbers-mode" data-ext="graphql"><pre class="language-graphql"><code><span class="token keyword">query</span> <span class="token punctuation">{</span>
+  <span class="token object">author</span> <span class="token punctuation">{</span>
+    <span class="token property">id</span>
+    <span class="token property">name</span>
+    <span class="token object">articles</span> <span class="token punctuation">{</span>
+      <span class="token property">id</span>
+      <span class="token property">title</span>
+      <span class="token property">content</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>解析器类似于：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>resolvers = {
+  Query: {
+    author: async () =&gt; {
+      return ORM.getAllAuthors()
+    }
+  },
+  Author: {
+    articles:  async (authorObj, args) =&gt; {
+      return ORM.getArticlesBy(authorObj.id)
+    }
+  },
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>好，现在我们看一下它的执行方式。 假设有 3 个作者，每个作者链接 2 篇文章。</p><p>为<code>author</code>调用第一个解析器，返回所有作者（本例中为 3 个）。 现在对于关联查询<code>articles</code>，将为每个作者调用一次解析器<code>articles</code>。 在这一朴素法中，这形成了对数据库的 4 次点击（1 次是作者，3 次是文章）。</p><p>你可以看到这个方法对性能的明显影响。</p><h3 id="dataloader" tabindex="-1"><a class="header-anchor" href="#dataloader" aria-hidden="true">#</a> 数据加载器</h3><p>数据加载器是一款实用工具，可作为你的应用程序数据抓取层的一部分使用。 在尝试解决 N+1 问题时，它的作用是等待所有解析器加载各自的值，合并所有的单个加载，并通过请求的键调用批处理函数。</p><h2 id="compiler-approach" tabindex="-1"><a class="header-anchor" href="#compiler-approach" aria-hidden="true">#</a> 编译器法</h2><p>批量解析器在很大程度上解决了性能问题。 它减少了对数据库的多次点击。 但即使使用批处理功能，根据查询的深度，对数据库的点击仍然有多次。</p><p>编译器法可将任何深度的一个 GraphQL 查询映射到一个数据库查询。 如果你的 GraphQL 查询处理来自数据库的数据，则其性能会更高。</p>`,29),o={href:"https://hasura.io/blog/fast-graphql-execution-with-query-caching-prepared-statements/",target:"_blank",rel:"noopener noreferrer"},u=e("h2",{id:"hybrid-approach",tabindex:"-1"},[e("a",{class:"header-anchor",href:"#hybrid-approach","aria-hidden":"true"},"#"),a(" 混合法")],-1),h=e("p",null,"如果数据来源不同，则我们需要综合使用上述方法。 编译器法适用于查询的数据库部分，使用数据加载器批处理查询最适合批处理外部数据源/HTTP 请求。",-1),v=e("p",null,"混合法架构使用含有互连数据库的服务器进行主要的 CRUD 操作，并使用解析器法执行通过不同的数据源抓取或变更数据的其他字段。",-1),m=e("p",null,"如果你从零开始自行编写 GraphQL 服务器，则要使用解析器法，编写函数，以解析查询的每个字段。 如果你希望将数据库映射至 GraphQL 以实现即时 CRUD，则编译器法就很适合。",-1),b=e("p",null,"通常，我们推荐混合法，你可以使用像 Hasura 这样的服务器，它为数据库提供即时 CRUD，而且如果你有某些其他的自定义业务逻辑，它还支持你编写自己的解析器。",-1);function g(_,x){const n=t("ExternalLinkIcon");return r(),i("div",null,[p,e("p",null,[a("了解 Hasura 如何使用编译器法"),e("a",o,[a("执行性能 GraphQL 查询"),l(n)]),a("。")]),u,h,v,m,b])}const L=s(c,[["render",g],["__file","graphql-server.html.vue"]]);export{L as default};
