@@ -135,7 +135,8 @@ export const zhSidebar = sidebar({
         "算法小抄数学运算.md",
         "算法小抄数据结构.md",
         "算法小抄高频面试.md",
-        "马拉车算法求解最长回文子串.md"
+        "马拉车算法求解最长回文子串.md",
+        "DFS和BFS算法.md"
       ],
     },
     {
@@ -194,7 +195,10 @@ export const zhSidebar = sidebar({
       prefix: "/codenotes/go/",
       children: [
         "一图搞懂GMP模型.md",
-        "gRpc使用快速入门.md"
+        "gRpc使用快速入门.md",
+        "协程顺序打印和交替打印.md",
+        "自己实现一个好用的代码生成器.md",
+        "go redis实现排行榜.md"
       ]
     },
     {
